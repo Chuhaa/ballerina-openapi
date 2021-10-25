@@ -133,6 +133,13 @@ public class GeneratorConstants {
     public static final String RECORD = "record";
     public static final String IDENTIFIER = "identifier";
     public static final String TYPE_NAME = "typeName";
+    public static final String APPLICATION_PREFIX = "application/";
+    public static final String PAYLOAD = "payload";
+    public static final String FORM_URLENCODED = "x-www-form-urlencoded";
+    public static final String OCTET_STREAM = "octet-stream";
+    public static final String TEXT_PREFIX = "text/";
+    public static final String BINARY = "binary";
+
     // auth related constants
     public static final String API_KEY = "apikey";
     public static final String API_KEYS_CONFIG = "ApiKeysConfig";

@@ -33,7 +33,7 @@ public isolated client class Client {
         map<string|string[]> accHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ApiResponseSuccess response = check self.clientEp->post(path, request, headers = accHeaders, targetType=ApiResponseSuccess);
         return response;
     }
@@ -59,7 +59,7 @@ public isolated client class Client {
         map<string|string[]> accHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ApiResponseSuccess response = check self.clientEp->post(path, request, headers = accHeaders, targetType=ApiResponseSuccess);
         return response;
     }
@@ -73,7 +73,7 @@ public isolated client class Client {
         map<string|string[]> accHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ApiResponseSuccess response = check self.clientEp->post(path, request, headers = accHeaders, targetType=ApiResponseSuccess);
         return response;
     }
@@ -87,7 +87,7 @@ public isolated client class Client {
         map<string|string[]> accHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ApiResponseSuccess response = check self.clientEp->post(path, request, headers = accHeaders, targetType=ApiResponseSuccess);
         return response;
     }
@@ -101,7 +101,7 @@ public isolated client class Client {
         map<string|string[]> accHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ApiResponseSuccess response = check self.clientEp->post(path, request, headers = accHeaders, targetType=ApiResponseSuccess);
         return response;
     }
@@ -127,7 +127,7 @@ public isolated client class Client {
         map<string|string[]> accHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ApiResponseSuccess response = check self.clientEp->post(path, request, headers = accHeaders, targetType=ApiResponseSuccess);
         return response;
     }

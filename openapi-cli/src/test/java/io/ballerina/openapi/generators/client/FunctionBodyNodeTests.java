@@ -88,24 +88,40 @@ public class FunctionBodyNodeTests {
                         "http:Response response = check self.clientEp-> delete(path, targetType = http:Response);" +
                         "return response;}"},
                 {"diagnostic_files/json_payload.yaml", "/pets", "{string  path = string `/pets`;" +
-                        "http:Request request = new; request.setPayload(payload); " +
+                        "http:Request request = new; request.setPayload(payload, \"application/json\"); " +
                         "http:Response response = check self.clientEp->" +
                         "post(path, request, targetType=http:Response); " +
                         "return response;}"},
                 {"diagnostic_files/xml_payload.yaml", "/pets", "{string  path = string `/pets`; " +
                         "http:Request request = new;" +
-                        "request.setPayload(payload); " +
+                        "request.setPayload(payload, \"application/xml\"); " +
                         "http:Response response = check self.clientEp->post(path, request, targetType=http:Response);" +
                         "return response;}"},
                 {"diagnostic_files/xml_payload_with_ref.yaml", "/pets", "{string  path = string `/pets`;" +
                         "http:Request request = new;" +
                         "json jsonBody = check payload.cloneWithType(json);" +
                         "xml? xmlBody = check xmldata:fromJson(jsonBody);" +
-                        "request.setPayload(xmlBody);" +
+                        "request.setPayload(xmlBody, \"application/xml\");" +
                         "http:Response response = check self.clientEp->post(path, request, targetType=http:Response);" +
                         "return response;}"},
                 {"swagger/response_type_order.yaml", "/pet/{petId}", "{string path = string `/pet/${petId}`;" +
                         "Pet response = check self.clientEp->get(path, targetType = Pet);" +
+                        "return response;}"},
+                {"swagger/text_request_payload.yaml", "/pets", "{string path = string `/pets`;" +
+                        "http:Request request = new;" +
+                        "request.setPayload(payload, \"text/csv\");" +
+                        "json response = check self.clientEp->post(path, request, targetType = json);" +
+                        "return response;}"},
+                {"swagger/binary_format_octet_stream_payload.yaml", "/pets", "{string path = string `/pets`;" +
+                        "http:Request request = new;" +
+                        "request.setPayload(payload, \"application/octet-stream\");" +
+                        "http:Response response = check self.clientEp->post(path, request, targetType=http:Response);" +
+                        "return response;}"},
+                {"swagger/byte_format_octet_stream_payload.yaml", "/pets", "{string path = string `/pets`;" +
+                        "http:Request request = new;" +
+                        "string encodedRequestBody = payload.toBase64();" +
+                        "request.setPayload(encodedRequestBody, \"application/octet-stream\");" +
+                        "http:Response response = check self.clientEp->post(path, request, targetType=http:Response);" +
                         "return response;}"}
         };
     }

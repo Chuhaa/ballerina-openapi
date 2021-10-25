@@ -91,6 +91,17 @@ public class RequestBodyTests {
         ballerinaClientGenerator.generateSyntaxTree();
     }
 
+    @Test(description = "Test for generating request body when operation has octet-stream media type")
+    public void testRequestBodyWithBOctedStreamMediaType() throws IOException, BallerinaOpenApiException {
+        Path expectedPath = RES_DIR.resolve("ballerina/binary_format_octet_stream_payload.bal");
+        CodeGenerator codeGenerator = new CodeGenerator();
+        OpenAPI openAPI = codeGenerator.normalizeOpenAPI(
+                RES_DIR.resolve("swagger/binary_format_octet_stream_payload.yaml"), true);
+        BallerinaClientGenerator ballerinaClientGenerator = new BallerinaClientGenerator(openAPI, filter, false);
+        syntaxTree = ballerinaClientGenerator.generateSyntaxTree();
+        compareGeneratedSyntaxTreeWithExpectedSyntaxTree(expectedPath, syntaxTree);
+    }
+
     @AfterTest
     private void deleteGeneratedFiles() {
         try {

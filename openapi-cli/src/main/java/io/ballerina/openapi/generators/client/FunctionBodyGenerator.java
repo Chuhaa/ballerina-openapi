@@ -92,18 +92,26 @@ import static io.ballerina.compiler.syntax.tree.SyntaxKind.OPEN_BRACE_TOKEN;
 import static io.ballerina.compiler.syntax.tree.SyntaxKind.SEMICOLON_TOKEN;
 import static io.ballerina.compiler.syntax.tree.SyntaxKind.STRING_KEYWORD;
 import static io.ballerina.openapi.generators.GeneratorConstants.API_KEY_CONFIG_PARAM;
+import static io.ballerina.openapi.generators.GeneratorConstants.APPLICATION_PREFIX;
 import static io.ballerina.openapi.generators.GeneratorConstants.BALLERINA;
+import static io.ballerina.openapi.generators.GeneratorConstants.BYTE;
 import static io.ballerina.openapi.generators.GeneratorConstants.DELETE;
 import static io.ballerina.openapi.generators.GeneratorConstants.ENCODING;
 import static io.ballerina.openapi.generators.GeneratorConstants.EXECUTE;
 import static io.ballerina.openapi.generators.GeneratorConstants.EXPLODE;
+import static io.ballerina.openapi.generators.GeneratorConstants.FORM_URLENCODED;
 import static io.ballerina.openapi.generators.GeneratorConstants.HEAD;
+import static io.ballerina.openapi.generators.GeneratorConstants.JSON;
+import static io.ballerina.openapi.generators.GeneratorConstants.OCTET_STREAM;
 import static io.ballerina.openapi.generators.GeneratorConstants.PATCH;
+import static io.ballerina.openapi.generators.GeneratorConstants.PAYLOAD;
 import static io.ballerina.openapi.generators.GeneratorConstants.POST;
 import static io.ballerina.openapi.generators.GeneratorConstants.PUT;
 import static io.ballerina.openapi.generators.GeneratorConstants.RESPONSE;
 import static io.ballerina.openapi.generators.GeneratorConstants.STRING;
 import static io.ballerina.openapi.generators.GeneratorConstants.STYLE;
+import static io.ballerina.openapi.generators.GeneratorConstants.TEXT_PREFIX;
+import static io.ballerina.openapi.generators.GeneratorConstants.XML;
 import static io.ballerina.openapi.generators.GeneratorUtils.escapeIdentifier;
 import static io.ballerina.openapi.generators.GeneratorUtils.extractReferenceType;
 import static io.ballerina.openapi.generators.GeneratorUtils.getValidName;
@@ -508,7 +516,7 @@ public class FunctionBodyGenerator {
      * <pre>
      *    http:Request request = new;
      *    json jsonBody = check payload.cloneWithType(json);
-     *    request.setPayload(jsonBody);
+     *    request.setPayload(jsonBody, "application/json");
      *    json response = check self.clientEp->put(path, request, targetType=json);
      * </pre>
      *
@@ -575,72 +583,93 @@ public class FunctionBodyGenerator {
             throws BallerinaOpenApiException {
 
         Schema requestBodySchema = mediaTypeEntry.getValue().getSchema();
-        if (mediaTypeEntry.getKey().contains("json")) {
-            if (requestBodySchema.get$ref() != null || requestBodySchema.getType() != null
-                    || requestBodySchema.getProperties() != null) {
-                VariableDeclarationNode jsonVariable = generatorUtils.getSimpleStatement("json",
-                        "jsonBody", "check payload.cloneWithType(json)");
-                statementsList.add(jsonVariable);
-                ExpressionStatementNode expressionStatementNode = generatorUtils.getSimpleExpressionStatementNode(
-                        "request.setPayload(jsonBody)");
-                statementsList.add(expressionStatementNode);
-            } else {
-                ExpressionStatementNode expressionStatementNode = generatorUtils.getSimpleExpressionStatementNode(
-                        "request.setPayload(payload)");
-                statementsList.add(expressionStatementNode);
-            }
-        } else if (mediaTypeEntry.getKey().contains("xml")) {
-
-            if (requestBodySchema.get$ref() != null || requestBodySchema.getType() != null
-                    || requestBodySchema.getProperties() != null) {
-                ImportDeclarationNode xmlImport = GeneratorUtils.getImportDeclarationNode(
-                        BALLERINA, "xmldata");
-                if (!checkImportDuplicate(imports, "xmldata")) {
-                    imports.add(xmlImport);
+        if (requestBodySchema.get$ref() != null || requestBodySchema.getType() != null
+                || requestBodySchema.getProperties() != null) {
+            if (mediaTypeEntry.getKey().startsWith(APPLICATION_PREFIX)) {
+                if (mediaTypeEntry.getKey().contains(JSON)) {
+                    setJsonPayload(statementsList, mediaTypeEntry);
+                } else if (mediaTypeEntry.getKey().contains(XML)) {
+                    setXmlPayload(statementsList, mediaTypeEntry);
+                } else if (mediaTypeEntry.getKey().contains(FORM_URLENCODED)) {
+                    setFormUrlEncodedPayload(statementsList, mediaTypeEntry);
+                } else if (mediaTypeEntry.getKey().contains(OCTET_STREAM)) {
+                    setOctedStreamPayload(statementsList, mediaTypeEntry);
+                } else {
+                    setPayload(statementsList, PAYLOAD, mediaTypeEntry);
                 }
-                VariableDeclarationNode jsonVariable = generatorUtils.getSimpleStatement("json",
-                        "jsonBody", "check payload.cloneWithType(json)");
-                statementsList.add(jsonVariable);
-                VariableDeclarationNode xmlBody = generatorUtils.getSimpleStatement("xml?", "xmlBody",
-                        "check xmldata:fromJson(jsonBody)");
-                statementsList.add(xmlBody);
-                ExpressionStatementNode expressionStatementNode = generatorUtils.getSimpleExpressionStatementNode(
-                        "request.setPayload(xmlBody)");
-                statementsList.add(expressionStatementNode);
+            } else if (mediaTypeEntry.getKey().startsWith(TEXT_PREFIX)) {
+                if (mediaTypeEntry.getKey().contains(JSON)) {
+                    setJsonPayload(statementsList, mediaTypeEntry);
+                } else {
+                    setPayload(statementsList, PAYLOAD, mediaTypeEntry);
+                }
             } else {
-                ExpressionStatementNode expressionStatementNode = generatorUtils.getSimpleExpressionStatementNode(
-                        "request.setPayload(payload)");
-                statementsList.add(expressionStatementNode);
+                throw new BallerinaOpenApiException("Unsupported media type '" + mediaTypeEntry.getKey() +
+                        "' is given in the request body");
             }
-        } else if (mediaTypeEntry.getKey().contains("plain")) {
-            ExpressionStatementNode expressionStatementNode = generatorUtils.getSimpleExpressionStatementNode(
-                    "request.setPayload(payload)");
-            statementsList.add(expressionStatementNode);
-        } else if (mediaTypeEntry.getKey().contains("x-www-form-urlencoded")) {
-            ballerinaUtilGenerator.setRequestBodyEncodingFound(true);
-            ExpressionStatementNode setContentTypeExpression = generatorUtils.getSimpleExpressionStatementNode(
-                    "check request.setContentType(\"application/x-www-form-urlencoded\")");
-            statementsList.add(setContentTypeExpression);
-            VariableDeclarationNode requestBodyEncodingMap = getRequestBodyEncodingMap(
-                    mediaTypeEntry.getValue().getEncoding());
-            if (requestBodyEncodingMap != null) {
-                statementsList.add(requestBodyEncodingMap);
-                VariableDeclarationNode requestBodyVariable = generatorUtils.getSimpleStatement(STRING,
-                        "encodedRequestBody",
-                        "createFormURLEncodedRequestBody(payload, requestBodyEncoding)");
-                statementsList.add(requestBodyVariable);
-            } else {
-                VariableDeclarationNode requestBodyVariable = generatorUtils.getSimpleStatement(STRING,
-                        "encodedRequestBody", "createFormURLEncodedRequestBody(payload)");
-                statementsList.add(requestBodyVariable);
-            }
-            ExpressionStatementNode setPayloadExpression = generatorUtils.getSimpleExpressionStatementNode(
-                    "request.setPayload(encodedRequestBody)");
-            statementsList.add(setPayloadExpression);
         } else {
-            throw new BallerinaOpenApiException("Unsupported media type '" + mediaTypeEntry.getKey() +
-                    "' is given in the request body");
+            setPayload(statementsList, PAYLOAD, mediaTypeEntry);
         }
+    }
+
+    private void setJsonPayload(List<StatementNode> statementsList, Map.Entry<String, MediaType> mediaTypeEntry) {
+        VariableDeclarationNode jsonVariable = generatorUtils.getSimpleStatement("json",
+                "jsonBody", "check payload.cloneWithType(json)");
+        statementsList.add(jsonVariable);
+        setPayload(statementsList, "jsonBody", mediaTypeEntry);
+    }
+
+    private void setXmlPayload(List<StatementNode> statementsList, Map.Entry<String, MediaType> mediaTypeEntry) {
+        ImportDeclarationNode xmlImport = GeneratorUtils.getImportDeclarationNode(
+                BALLERINA, "xmldata");
+        if (!checkImportDuplicate(imports, "xmldata")) {
+            imports.add(xmlImport);
+        }
+        VariableDeclarationNode jsonVariable = generatorUtils.getSimpleStatement("json",
+                "jsonBody", "check payload.cloneWithType(json)");
+        statementsList.add(jsonVariable);
+        VariableDeclarationNode xmlBody = generatorUtils.getSimpleStatement("xml?", "xmlBody",
+                "check xmldata:fromJson(jsonBody)");
+        statementsList.add(xmlBody);
+        setPayload(statementsList, "xmlBody", mediaTypeEntry);
+    }
+
+    private void setFormUrlEncodedPayload(List<StatementNode> statementsList,
+                                          Map.Entry<String, MediaType> mediaTypeEntry) {
+        ballerinaUtilGenerator.setRequestBodyEncodingFound(true);
+        VariableDeclarationNode requestBodyEncodingMap = getRequestBodyEncodingMap(
+                mediaTypeEntry.getValue().getEncoding());
+        if (requestBodyEncodingMap != null) {
+            statementsList.add(requestBodyEncodingMap);
+            VariableDeclarationNode requestBodyVariable = generatorUtils.getSimpleStatement(STRING,
+                    "encodedRequestBody",
+                    "createFormURLEncodedRequestBody(payload, requestBodyEncoding)");
+            statementsList.add(requestBodyVariable);
+        } else {
+            VariableDeclarationNode requestBodyVariable = generatorUtils.getSimpleStatement(STRING,
+                    "encodedRequestBody", "createFormURLEncodedRequestBody(payload)");
+            statementsList.add(requestBodyVariable);
+        }
+        setPayload(statementsList, "encodedRequestBody", mediaTypeEntry);
+    }
+
+    private void setOctedStreamPayload(List<StatementNode> statementsList,
+                                       Map.Entry<String, MediaType> mediaTypeEntry) {
+        if (mediaTypeEntry.getValue().getSchema().getFormat().equals(BYTE)) {
+            VariableDeclarationNode encodedVariable = generatorUtils.getSimpleStatement("string",
+                    "encodedRequestBody", "payload.toBase64()");
+            statementsList.add(encodedVariable);
+            setPayload(statementsList, "encodedRequestBody", mediaTypeEntry);
+        } else {
+            setPayload(statementsList, PAYLOAD, mediaTypeEntry);
+        }
+    }
+
+    private void setPayload(List<StatementNode> statementsList, String name, Map.Entry<String,
+            MediaType> mediaTypeEntry) {
+        ExpressionStatementNode setPayloadExpression = generatorUtils.getSimpleExpressionStatementNode(
+                String.format("request.setPayload(%s, \"%s\")", name, mediaTypeEntry.getKey()));
+        statementsList.add(setPayloadExpression);
     }
 
     /**

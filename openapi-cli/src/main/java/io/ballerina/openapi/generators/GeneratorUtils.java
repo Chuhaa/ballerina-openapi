@@ -219,6 +219,12 @@ public class GeneratorUtils {
             case Constants.FLOAT:
                 convertedType = "float";
                 break;
+            case Constants.BINARY:
+                convertedType = "byte[]";
+                break;
+            case Constants.BYTE:
+                convertedType = "byte[]";
+                break;
             default:
                 throw new BallerinaOpenApiException("Unsupported OAS data type `" + type + "`");
         }

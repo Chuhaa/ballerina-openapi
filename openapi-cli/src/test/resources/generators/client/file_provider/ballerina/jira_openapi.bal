@@ -67,7 +67,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/app/field/${fieldIdOrKey}/value`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -87,7 +87,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/application-properties/${id}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ApplicationProperty response = check self.clientEp->put(path, request, targetType=ApplicationProperty);
         return response;
     }
@@ -146,7 +146,7 @@ public isolated client class Client {
         path = path + check check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         PageBeanComment response = check self.clientEp->post(path, request, targetType=PageBeanComment);
         return response;
     }
@@ -164,7 +164,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/comment/${commentId}/properties/${propertyKey}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -179,7 +179,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/component`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Component response = check self.clientEp->post(path, request, targetType=Component);
         return response;
     }
@@ -192,7 +192,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/component/${id}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Component response = check self.clientEp->put(path, request, targetType=Component);
         return response;
     }
@@ -224,7 +224,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/configuration/timetracking`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -242,7 +242,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/configuration/timetracking/options`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         TimeTrackingConfiguration response = check self.clientEp->put(path, request, targetType=TimeTrackingConfiguration);
         return response;
     }
@@ -257,7 +257,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/customField/${fieldId}/option`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -265,7 +265,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/customField/${fieldId}/option`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->post(path, request, targetType=json);
         return response;
     }
@@ -285,7 +285,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/dashboard`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Dashboard response = check self.clientEp->post(path, request, targetType=Dashboard);
         return response;
     }
@@ -310,7 +310,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/dashboard/${dashboardId}/items/${itemId}/properties/${propertyKey}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -330,7 +330,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/dashboard/${id}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Dashboard response = check self.clientEp->put(path, request, targetType=Dashboard);
         return response;
     }
@@ -345,7 +345,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/dashboard/${id}/copy`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Dashboard response = check self.clientEp->post(path, request, targetType=Dashboard);
         return response;
     }
@@ -355,7 +355,7 @@ public isolated client class Client {
         path = path + check check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         JiraExpressionsAnalysis response = check self.clientEp->post(path, request, targetType=JiraExpressionsAnalysis);
         return response;
     }
@@ -365,7 +365,7 @@ public isolated client class Client {
         path = path + check check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         JiraExpressionResult response = check self.clientEp->post(path, request, targetType=JiraExpressionResult);
         return response;
     }
@@ -378,7 +378,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         FieldDetails response = check self.clientEp->post(path, request, targetType=FieldDetails);
         return response;
     }
@@ -393,7 +393,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldId}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -408,7 +408,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldId}/context`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         CreateCustomFieldContext response = check self.clientEp->post(path, request, targetType=CreateCustomFieldContext);
         return response;
     }
@@ -423,7 +423,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldId}/context/defaultValue`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -440,7 +440,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         PageBeanContextForProjectAndIssueType response = check self.clientEp->post(path, request, targetType=PageBeanContextForProjectAndIssueType);
         return response;
     }
@@ -455,7 +455,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldId}/context/${contextId}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -470,7 +470,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldId}/context/${contextId}/issuetype`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -478,7 +478,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldId}/context/${contextId}/issuetype/remove`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->post(path, request, targetType=json);
         return response;
     }
@@ -493,7 +493,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldId}/context/${contextId}/option`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         CustomFieldUpdatedContextOptionsList response = check self.clientEp->put(path, request, targetType=CustomFieldUpdatedContextOptionsList);
         return response;
     }
@@ -501,7 +501,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldId}/context/${contextId}/option`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         CustomFieldCreatedContextOptionsList response = check self.clientEp->post(path, request, targetType=CustomFieldCreatedContextOptionsList);
         return response;
     }
@@ -509,7 +509,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldId}/context/${contextId}/option/move`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -524,7 +524,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldId}/context/${contextId}/project`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -532,7 +532,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldId}/context/${contextId}/project/remove`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->post(path, request, targetType=json);
         return response;
     }
@@ -561,7 +561,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldKey}/option`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         IssueFieldOption response = check self.clientEp->post(path, request, targetType=IssueFieldOption);
         return response;
     }
@@ -588,7 +588,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/field/${fieldKey}/option/${optionId}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         IssueFieldOption response = check self.clientEp->put(path, request, targetType=IssueFieldOption);
         return response;
     }
@@ -647,7 +647,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/fieldconfigurationscheme/project`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -664,7 +664,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Filter response = check self.clientEp->post(path, request, targetType=Filter);
         return response;
     }
@@ -677,7 +677,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/filter/defaultShareScope`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         DefaultShareScope response = check self.clientEp->put(path, request, targetType=DefaultShareScope);
         return response;
     }
@@ -715,7 +715,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Filter response = check self.clientEp->put(path, request, targetType=Filter);
         return response;
     }
@@ -771,7 +771,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/filter/${id}/permission`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         SharePermissionArr response = check self.clientEp->post(path, request, targetType=SharePermissionArr);
         return response;
     }
@@ -798,7 +798,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/group`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Group response = check self.clientEp->post(path, request, targetType=Group);
         return response;
     }
@@ -831,7 +831,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Group response = check self.clientEp->post(path, request, targetType=Group);
         return response;
     }
@@ -869,7 +869,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         CreatedIssue response = check self.clientEp->post(path, request, targetType=CreatedIssue);
         return response;
     }
@@ -877,7 +877,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issue/bulk`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         CreatedIssues response = check self.clientEp->post(path, request, targetType=CreatedIssues);
         return response;
     }
@@ -899,7 +899,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issue/properties`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         http:Response  response = check self.clientEp->post(path, request, targetType=http:Response );
         return response;
     }
@@ -907,7 +907,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issue/properties/${propertyKey}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         http:Response  response = check self.clientEp->put(path, request, targetType=http:Response );
         return response;
     }
@@ -931,7 +931,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -948,7 +948,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issue/${issueIdOrKey}/assignee`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -978,7 +978,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Comment response = check self.clientEp->post(path, request, targetType=Comment);
         return response;
     }
@@ -995,7 +995,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Comment response = check self.clientEp->put(path, request, targetType=Comment);
         return response;
     }
@@ -1017,7 +1017,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issue/${issueIdOrKey}/notify`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->post(path, request, targetType=json);
         return response;
     }
@@ -1035,7 +1035,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issue/${issueIdOrKey}/properties/${propertyKey}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1057,7 +1057,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issue/${issueIdOrKey}/remotelink`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         RemoteIssueLinkIdentifies response = check self.clientEp->post(path, request, targetType=RemoteIssueLinkIdentifies);
         return response;
     }
@@ -1079,7 +1079,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issue/${issueIdOrKey}/remotelink/${linkId}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1101,7 +1101,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issue/${issueIdOrKey}/transitions`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->post(path, request, targetType=json);
         return response;
     }
@@ -1133,7 +1133,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issue/${issueIdOrKey}/watchers`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->post(path, request, targetType=json);
         return response;
     }
@@ -1159,7 +1159,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Worklog response = check self.clientEp->post(path, request, targetType=Worklog);
         return response;
     }
@@ -1176,7 +1176,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Worklog response = check self.clientEp->put(path, request, targetType=Worklog);
         return response;
     }
@@ -1203,7 +1203,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issue/${issueIdOrKey}/worklog/${worklogId}/properties/${propertyKey}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1218,7 +1218,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issueLink`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->post(path, request, targetType=json);
         return response;
     }
@@ -1243,7 +1243,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issueLinkType`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         IssueLinkType response = check self.clientEp->post(path, request, targetType=IssueLinkType);
         return response;
     }
@@ -1256,7 +1256,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issueLinkType/${issueLinkTypeId}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         IssueLinkType response = check self.clientEp->put(path, request, targetType=IssueLinkType);
         return response;
     }
@@ -1293,7 +1293,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetype`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         IssueTypeDetails response = check self.clientEp->post(path, request, targetType=IssueTypeDetails);
         return response;
     }
@@ -1306,7 +1306,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetype/${id}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         IssueTypeDetails response = check self.clientEp->put(path, request, targetType=IssueTypeDetails);
         return response;
     }
@@ -1346,7 +1346,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetype/${issueTypeId}/properties/${propertyKey}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1368,7 +1368,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetypescheme`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         IssueTypeSchemeID response = check self.clientEp->post(path, request, targetType=IssueTypeSchemeID);
         return response;
     }
@@ -1390,7 +1390,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetypescheme/project`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1398,7 +1398,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetypescheme/${issueTypeSchemeId}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1413,7 +1413,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetypescheme/${issueTypeSchemeId}/issuetype`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1421,7 +1421,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetypescheme/${issueTypeSchemeId}/issuetype/move`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1443,7 +1443,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetypescreenscheme`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         IssueTypeScreenSchemeId response = check self.clientEp->post(path, request, targetType=IssueTypeScreenSchemeId);
         return response;
     }
@@ -1465,7 +1465,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetypescreenscheme/project`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1473,7 +1473,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetypescreenscheme/${issueTypeScreenSchemeId}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1488,7 +1488,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetypescreenscheme/${issueTypeScreenSchemeId}/mapping`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1496,7 +1496,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetypescreenscheme/${issueTypeScreenSchemeId}/mapping/default`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1504,7 +1504,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/issuetypescreenscheme/${issueTypeScreenSchemeId}/mapping/remove`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->post(path, request, targetType=json);
         return response;
     }
@@ -1517,7 +1517,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/jql/autocompletedata`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         JQLReferenceData response = check self.clientEp->post(path, request, targetType=JQLReferenceData);
         return response;
     }
@@ -1532,7 +1532,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/jql/match`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         IssueMatches response = check self.clientEp->post(path, request, targetType=IssueMatches);
         return response;
     }
@@ -1542,7 +1542,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ParsedJqlQueries response = check self.clientEp->post(path, request, targetType=ParsedJqlQueries);
         return response;
     }
@@ -1550,7 +1550,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/jql/pdcleaner`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ConvertedJQLQueries response = check self.clientEp->post(path, request, targetType=ConvertedJQLQueries);
         return response;
     }
@@ -1581,7 +1581,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1603,7 +1603,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/mypreferences/locale`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1644,7 +1644,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/permissions/check`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         BulkPermissionGrants response = check self.clientEp->post(path, request, targetType=BulkPermissionGrants);
         return response;
     }
@@ -1652,7 +1652,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/permissions/project`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         PermittedProjects response = check self.clientEp->post(path, request, targetType=PermittedProjects);
         return response;
     }
@@ -1669,7 +1669,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         PermissionScheme response = check self.clientEp->post(path, request, targetType=PermissionScheme);
         return response;
     }
@@ -1686,7 +1686,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         PermissionScheme response = check self.clientEp->put(path, request, targetType=PermissionScheme);
         return response;
     }
@@ -1710,7 +1710,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         PermissionGrant response = check self.clientEp->post(path, request, targetType=PermissionGrant);
         return response;
     }
@@ -1749,7 +1749,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/project`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ProjectIdentifiers response = check self.clientEp->post(path, request, targetType=ProjectIdentifiers);
         return response;
     }
@@ -1793,7 +1793,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Project response = check self.clientEp->put(path, request, targetType=Project);
         return response;
     }
@@ -1817,7 +1817,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/project/${projectIdOrKey}/avatar`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1869,7 +1869,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/project/${projectIdOrKey}/features/${featureKey}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ProjectFeaturesResponse response = check self.clientEp->put(path, request, targetType=ProjectFeaturesResponse);
         return response;
     }
@@ -1887,7 +1887,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/project/${projectIdOrKey}/properties/${propertyKey}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -1919,7 +1919,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/project/${projectIdOrKey}/role/${id}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ProjectRole response = check self.clientEp->put(path, request, targetType=ProjectRole);
         return response;
     }
@@ -1927,7 +1927,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/project/${projectIdOrKey}/role/${id}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ProjectRole response = check self.clientEp->post(path, request, targetType=ProjectRole);
         return response;
     }
@@ -1982,7 +1982,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/project/${projectId}/email`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -2016,7 +2016,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         PermissionScheme response = check self.clientEp->put(path, request, targetType=PermissionScheme);
         return response;
     }
@@ -2034,7 +2034,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/projectCategory`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ProjectCategory response = check self.clientEp->post(path, request, targetType=ProjectCategory);
         return response;
     }
@@ -2047,7 +2047,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/projectCategory/${id}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         UpdatedProjectCategory response = check self.clientEp->put(path, request, targetType=UpdatedProjectCategory);
         return response;
     }
@@ -2098,7 +2098,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/role`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ProjectRole response = check self.clientEp->post(path, request, targetType=ProjectRole);
         return response;
     }
@@ -2111,7 +2111,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/role/${id}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ProjectRole response = check self.clientEp->put(path, request, targetType=ProjectRole);
         return response;
     }
@@ -2119,7 +2119,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/role/${id}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ProjectRole response = check self.clientEp->post(path, request, targetType=ProjectRole);
         return response;
     }
@@ -2141,7 +2141,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/role/${id}/actors`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ProjectRole response = check self.clientEp->post(path, request, targetType=ProjectRole);
         return response;
     }
@@ -2165,7 +2165,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/screens`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Screen response = check self.clientEp->post(path, request, targetType=Screen);
         return response;
     }
@@ -2180,7 +2180,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/screens/${screenId}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Screen response = check self.clientEp->put(path, request, targetType=Screen);
         return response;
     }
@@ -2207,7 +2207,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/screens/${screenId}/tabs`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ScreenableTab response = check self.clientEp->post(path, request, targetType=ScreenableTab);
         return response;
     }
@@ -2215,7 +2215,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/screens/${screenId}/tabs/${tabId}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ScreenableTab response = check self.clientEp->put(path, request, targetType=ScreenableTab);
         return response;
     }
@@ -2237,7 +2237,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/screens/${screenId}/tabs/${tabId}/fields`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ScreenableField response = check self.clientEp->post(path, request, targetType=ScreenableField);
         return response;
     }
@@ -2252,7 +2252,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/screens/${screenId}/tabs/${tabId}/fields/${id}/move`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->post(path, request, targetType=json);
         return response;
     }
@@ -2274,7 +2274,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/screenscheme`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ScreenSchemeId response = check self.clientEp->post(path, request, targetType=ScreenSchemeId);
         return response;
     }
@@ -2282,7 +2282,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/screenscheme/${screenSchemeId}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -2304,7 +2304,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/search`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         SearchResults response = check self.clientEp->post(path, request, targetType=SearchResults);
         return response;
     }
@@ -2392,7 +2392,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/user`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         User response = check self.clientEp->post(path, request, targetType=User);
         return response;
     }
@@ -2512,7 +2512,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -2571,7 +2571,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/version`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Version response = check self.clientEp->post(path, request, targetType=Version);
         return response;
     }
@@ -2586,7 +2586,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/version/${id}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Version response = check self.clientEp->put(path, request, targetType=Version);
         return response;
     }
@@ -2610,7 +2610,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/version/${id}/move`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         Version response = check self.clientEp->post(path, request, targetType=Version);
         return response;
     }
@@ -2623,7 +2623,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/version/${id}/removeAndSwap`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->post(path, request, targetType=json);
         return response;
     }
@@ -2643,7 +2643,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/webhook`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         ContainerForRegisteredWebhooks response = check self.clientEp->post(path, request, targetType=ContainerForRegisteredWebhooks);
         return response;
     }
@@ -2665,7 +2665,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/webhook/refresh`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WebhooksExpirationDate response = check self.clientEp->put(path, request, targetType=WebhooksExpirationDate);
         return response;
     }
@@ -2680,7 +2680,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/workflow`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowIDs response = check self.clientEp->post(path, request, targetType=WorkflowIDs);
         return response;
     }
@@ -2695,7 +2695,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/workflow/rule/config`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowTransitionRulesUpdateErrors response = check self.clientEp->put(path, request, targetType=WorkflowTransitionRulesUpdateErrors);
         return response;
     }
@@ -2719,7 +2719,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowTransitionProperty response = check self.clientEp->put(path, request, targetType=WorkflowTransitionProperty);
         return response;
     }
@@ -2729,7 +2729,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowTransitionProperty response = check self.clientEp->post(path, request, targetType=WorkflowTransitionProperty);
         return response;
     }
@@ -2760,7 +2760,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/workflowscheme`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowScheme response = check self.clientEp->post(path, request, targetType=WorkflowScheme);
         return response;
     }
@@ -2775,7 +2775,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/workflowscheme/project`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         json response = check self.clientEp->put(path, request, targetType=json);
         return response;
     }
@@ -2790,7 +2790,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/workflowscheme/${id}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowScheme response = check self.clientEp->put(path, request, targetType=WorkflowScheme);
         return response;
     }
@@ -2819,7 +2819,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/workflowscheme/${id}/default`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowScheme response = check self.clientEp->put(path, request, targetType=WorkflowScheme);
         return response;
     }
@@ -2841,7 +2841,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/workflowscheme/${id}/draft`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowScheme response = check self.clientEp->put(path, request, targetType=WorkflowScheme);
         return response;
     }
@@ -2861,7 +2861,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/workflowscheme/${id}/draft/default`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowScheme response = check self.clientEp->put(path, request, targetType=WorkflowScheme);
         return response;
     }
@@ -2881,7 +2881,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/workflowscheme/${id}/draft/issuetype/${issueType}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowScheme response = check self.clientEp->put(path, request, targetType=WorkflowScheme);
         return response;
     }
@@ -2905,7 +2905,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowScheme response = check self.clientEp->put(path, request, targetType=WorkflowScheme);
         return response;
     }
@@ -2929,7 +2929,7 @@ public isolated client class Client {
         string  path = string `/rest/api/2/workflowscheme/${id}/issuetype/${issueType}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowScheme response = check self.clientEp->put(path, request, targetType=WorkflowScheme);
         return response;
     }
@@ -2955,7 +2955,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorkflowScheme response = check self.clientEp->put(path, request, targetType=WorkflowScheme);
         return response;
     }
@@ -2981,7 +2981,7 @@ public isolated client class Client {
         path = path + check getPathForQueryParam(queryParam);
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         WorklogArr response = check self.clientEp->post(path, request, targetType=WorklogArr);
         return response;
     }
@@ -3006,7 +3006,7 @@ public isolated client class Client {
         string  path = string `/rest/atlassian-connect/1/addons/${addonKey}/properties/${propertyKey}`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         OperationMessage response = check self.clientEp->put(path, request, targetType=OperationMessage);
         return response;
     }
@@ -3026,7 +3026,7 @@ public isolated client class Client {
         string  path = string `/rest/atlassian-connect/1/app/module/dynamic`;
         http:Request request = new;
         json jsonBody = check payload.cloneWithType(json);
-        request.setPayload(jsonBody);
+        request.setPayload(jsonBody, "application/json");
         http:Response  response = check self.clientEp->post(path, request, targetType=http:Response );
         return response;
     }

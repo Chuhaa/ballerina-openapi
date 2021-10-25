@@ -73,6 +73,8 @@ public class Constants {
     public static final String SPLIT_PATTERN = "([\\[\\]\\\\?!<>@#&~`*\\-=^+();:\\/\\_{}\\s|.$])";
     public static final String APPLICATION_PREFIX = "application/";
     public static final String JSON_POSTFIX = "+json";
+    public static final String BINARY = "binary";
+    public static final String BYTE = "byte";
 
     /**
      * Enum to select the Ballerina Type.
