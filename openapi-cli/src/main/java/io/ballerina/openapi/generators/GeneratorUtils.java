@@ -43,7 +43,6 @@ import io.ballerina.compiler.syntax.tree.TypedBindingPatternNode;
 import io.ballerina.compiler.syntax.tree.VariableDeclarationNode;
 import io.ballerina.openapi.ErrorMessages;
 import io.ballerina.openapi.cmd.model.GenSrcFile;
-import io.ballerina.openapi.converter.Constants;
 import io.ballerina.openapi.exception.BallerinaOpenApiException;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
@@ -92,14 +91,25 @@ import static io.ballerina.compiler.syntax.tree.SyntaxKind.OPEN_BRACE_TOKEN;
 import static io.ballerina.compiler.syntax.tree.SyntaxKind.SEMICOLON_TOKEN;
 import static io.ballerina.compiler.syntax.tree.SyntaxKind.STRING_KEYWORD;
 import static io.ballerina.openapi.cmd.OpenApiMesseges.BAL_KEYWORDS;
+import static io.ballerina.openapi.generators.GeneratorConstants.ARRAY;
 import static io.ballerina.openapi.generators.GeneratorConstants.BALLERINA;
+import static io.ballerina.openapi.generators.GeneratorConstants.BINARY;
+import static io.ballerina.openapi.generators.GeneratorConstants.BOOLEAN;
+import static io.ballerina.openapi.generators.GeneratorConstants.BYTE;
+import static io.ballerina.openapi.generators.GeneratorConstants.DECIMAL;
 import static io.ballerina.openapi.generators.GeneratorConstants.DELETE;
+import static io.ballerina.openapi.generators.GeneratorConstants.DOUBLE;
 import static io.ballerina.openapi.generators.GeneratorConstants.EXPLODE;
+import static io.ballerina.openapi.generators.GeneratorConstants.FLOAT;
 import static io.ballerina.openapi.generators.GeneratorConstants.GET;
 import static io.ballerina.openapi.generators.GeneratorConstants.HEAD;
+import static io.ballerina.openapi.generators.GeneratorConstants.INTEGER;
+import static io.ballerina.openapi.generators.GeneratorConstants.NUMBER;
+import static io.ballerina.openapi.generators.GeneratorConstants.OBJECT;
 import static io.ballerina.openapi.generators.GeneratorConstants.OPTIONS;
 import static io.ballerina.openapi.generators.GeneratorConstants.PATCH;
 import static io.ballerina.openapi.generators.GeneratorConstants.PUT;
+import static io.ballerina.openapi.generators.GeneratorConstants.STRING;
 import static io.ballerina.openapi.generators.GeneratorConstants.STYLE;
 import static io.ballerina.openapi.generators.GeneratorConstants.TRACE;
 
@@ -209,35 +219,35 @@ public class GeneratorUtils {
     public static String convertOpenAPITypeToBallerina(String type) throws BallerinaOpenApiException {
         String convertedType;
         switch (type) {
-            case Constants.INTEGER:
+            case INTEGER:
                 convertedType = "int";
                 break;
-            case Constants.STRING:
+            case STRING:
                 convertedType = "string";
                 break;
-            case Constants.BOOLEAN:
+            case BOOLEAN:
                 convertedType = "boolean";
                 break;
-            case Constants.ARRAY:
+            case ARRAY:
                 convertedType = "[]";
                 break;
-            case Constants.OBJECT:
+            case OBJECT:
                 convertedType = "record {}";
                 break;
-            case Constants.DECIMAL:
+            case DECIMAL:
                 convertedType = "decimal";
                 break;
-            case Constants.NUMBER:
+            case NUMBER:
                 convertedType = "decimal";
                 break;
-            case Constants.DOUBLE:
-            case Constants.FLOAT:
+            case DOUBLE:
+            case FLOAT:
                 convertedType = "float";
                 break;
-            case Constants.BINARY:
+            case BINARY:
                 convertedType = "byte[]";
                 break;
-            case Constants.BYTE:
+            case BYTE:
                 convertedType = "byte[]";
                 break;
             default:
@@ -591,7 +601,7 @@ public class GeneratorUtils {
     /*
      * Generate variableDeclarationNode.
      */
-    public VariableDeclarationNode getSimpleStatement(String responseType, String variable,
+    public static VariableDeclarationNode getSimpleStatement(String responseType, String variable,
                                                              String initializer) {
         SimpleNameReferenceNode resTypeBind = createSimpleNameReferenceNode(createIdentifierToken(responseType));
         CaptureBindingPatternNode bindingPattern = createCaptureBindingPatternNode(createIdentifierToken(variable));
@@ -605,7 +615,7 @@ public class GeneratorUtils {
     /*
      * Generate expressionStatementNode.
      */
-    public ExpressionStatementNode getSimpleExpressionStatementNode(String expression) {
+    public static ExpressionStatementNode getSimpleExpressionStatementNode(String expression) {
         SimpleNameReferenceNode expressionNode = createSimpleNameReferenceNode(
                 createIdentifierToken(expression));
         return createExpressionStatementNode(null, expressionNode, createToken(SEMICOLON_TOKEN));

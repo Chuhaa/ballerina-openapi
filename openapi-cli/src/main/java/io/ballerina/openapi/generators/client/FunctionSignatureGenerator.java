@@ -102,7 +102,6 @@ public class FunctionSignatureGenerator {
     private final BallerinaSchemaGenerator ballerinaSchemaGenerator;
     private final List<TypeDefinitionNode> typeDefinitionNodeList;
     private FunctionReturnType functionReturnType;
-    private GeneratorUtils generatorUtils;
     private boolean deprecatedParamFound = false;
 
     public List<TypeDefinitionNode> getTypeDefinitionNodeList() {
@@ -116,7 +115,6 @@ public class FunctionSignatureGenerator {
         this.openAPI = openAPI;
         this.ballerinaSchemaGenerator = ballerinaSchemaGenerator;
         this.typeDefinitionNodeList = typeDefinitionNodeList;
-        this.generatorUtils = new GeneratorUtils();
         this.functionReturnType =  new FunctionReturnType(openAPI, ballerinaSchemaGenerator, typeDefinitionNodeList);
 
     }
@@ -466,7 +464,7 @@ public class FunctionSignatureGenerator {
                 paramType = generateRecordForInlineRequestBody(operationId, requestBody, schema.getProperties(),
                         schema.getRequired());
             } else {
-                paramType = generatorUtils.getBallerinaMediaType(next.getKey());
+                paramType = GeneratorUtils.getBallerinaMediaType(next.getKey());
             }
             if (!paramType.isBlank()) {
                 List<AnnotationNode> annotationNodes  = new ArrayList<>();
@@ -520,7 +518,7 @@ public class FunctionSignatureGenerator {
                     createIdentifierToken(paramType), typeDescriptorNodeForArraySchema, createToken(SEMICOLON_TOKEN));
             functionReturnType.updateTypeDefinitionNodeList(paramType, arrayTypeNode);
         } else {
-            paramType = generatorUtils.getBallerinaMediaType(next.getKey().trim()) + "[]";
+            paramType = GeneratorUtils.getBallerinaMediaType(next.getKey().trim()) + "[]";
         }
         return paramType;
     }
@@ -530,9 +528,9 @@ public class FunctionSignatureGenerator {
             throws BallerinaOpenApiException {
 
         if (composedSchema.getOneOf() != null) {
-            paramType = generatorUtils.getOneOfUnionType(composedSchema.getOneOf());
+            paramType = GeneratorUtils.getOneOfUnionType(composedSchema.getOneOf());
         } else if (composedSchema.getAnyOf() != null) {
-            paramType = generatorUtils.getOneOfUnionType(composedSchema.getAnyOf());
+            paramType = GeneratorUtils.getOneOfUnionType(composedSchema.getAnyOf());
         } else if (composedSchema.getAllOf() != null) {
             paramType = "Compound" +  getValidName(operationId, true) + "Request";
             List<Schema> allOf = composedSchema.getAllOf();

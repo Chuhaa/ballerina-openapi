@@ -133,9 +133,15 @@ public class GeneratorConstants {
     public static final String RECORD = "record";
     public static final String IDENTIFIER = "identifier";
     public static final String TYPE_NAME = "typeName";
-    public static final String TEXT_PREFIX = "text/";
+    public static final String ARRAY = "array";
     public static final String BINARY = "binary";
+    public static final String DECIMAL = "decimal";
+    public static final String DOUBLE = "double";
+    public static final String FLOAT = "float";
+    public static final String OBJECT = "object";
     public static final String PDF = "pdf";
+    public static final String TEXT_PREFIX = "text/";
+    public static final String XML_DATA = "xmldata";
 
     // auth related constants
     public static final String API_KEY = "apikey";
